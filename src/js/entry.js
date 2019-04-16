@@ -13,9 +13,9 @@ window.onload = function() {
   let figure = Model.createFigure();
   View.renderFigure(figure);
 
-  console.log(figure);
 
   function move() {
+
     let canMove = true;
     
     let coordinates = [];
@@ -24,13 +24,9 @@ window.onload = function() {
       coordinates.push([ figure[i].attributes['posx'].value, figure[i].attributes['posy'].value  ]);
     }
 
-    console.log(figure);
-    
     for (let y = 18; y > 0; y--) {
-      for (let i = 0; i > figure.length; i++) { 
-        console.log(y);
-        console.log(canMove);
-        if ((y === 1) || (document.querySelector(`[posx='${coordinates[i][0]}'][posy='${coordinates[i][1] - 1}']`).classList.contains('set')) ) {
+      for (let k = 0; k < figure.length; k++) { 
+        if ( (figure[k].attributes['posy'].value == 1) || (document.querySelector(`[posx='${coordinates[k][0]}'][posy='${coordinates[k][1] - 1}']`).classList.contains('set')) ) {
           canMove = false;
           break;
         }
@@ -48,11 +44,14 @@ window.onload = function() {
       figure = newFigure;
     } else {
       for (let i = 0; i < figure.length; i++) {
-        console.log(figure[i]);
+        figure[i].classList.remove('choosed');
         figure[i].classList.add('set');
       }
+
+      figure = Model.createFigure();
+      View.renderFigure(figure);
     }
-  }
+  };
 
   setInterval(move, 500);
 }();
