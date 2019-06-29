@@ -3,8 +3,5 @@ export default {
     for (let i = 0; i < figure.length; i++) {
       figure[i].classList.add('choosed');
     }
-  },
-
-  
-
+  }
 }

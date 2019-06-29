@@ -1,10 +1,10 @@
-import Params from "../../params.js"
+import {figureCreatingCoordinates} from './params.js'
 
-export default {
+const Model = {
   createTetrisTemplate: function(tetris) {
     tetris.classList.add('tetris');
   
-    for (let y = 20; y > 0; y--) {
+    for (let y = 18; y > 0; y--) {
       for (let x = 1; x < 11; x++) {
         let excel = document.createElement('div');
         excel.classList.add('excel');
@@ -117,20 +117,21 @@ export default {
   ],
 
   createFigure: function() {
-    let {startX, startY} = Params;
-    let randomFigure = this.getNumberOfRandomFigure(this.figures.length);
+    const {startX, startY} = figureCreatingCoordinates;
+    const randomFigure = getNumberOfRandomFigure(this.figures.length);
     const figures = this.figures;
 
     return [
-      document.querySelector(`[posx='${startX}'][posy='${startY}']`),
-      document.querySelector(`[posx='${startX + figures[randomFigure][0][0][0]}'][posy='${startY + figures[randomFigure][0][0][1]}']`),
-      document.querySelector(`[posx='${startX + figures[randomFigure][0][1][0]}'][posy='${startY + figures[randomFigure][0][1][1]}']`),
-      document.querySelector(`[posx='${startX + figures[randomFigure][0][2][0]}'][posy='${startY + figures[randomFigure][0][2][1]}']`)
-    ];
+      document.querySelector(`[posX='${startX}'][posY='${startY}']`),
+      document.querySelector(`[posX='${startX + figures[randomFigure][0][0][0]}'][posY='${startY + figures[randomFigure][0][0][1]}']`),
+      document.querySelector(`[posX='${startX + figures[randomFigure][0][1][0]}'][posY='${startY + figures[randomFigure][0][1][1]}']`),
+      document.querySelector(`[posX='${startX + figures[randomFigure][0][2][0]}'][posY='${startY + figures[randomFigure][0][2][1]}']`)
+    ]
   },
-
-  getNumberOfRandomFigure: function() {
-    return Math.floor(Math.random() * this.figures.length);
-  },
-
 }
+
+function getNumberOfRandomFigure() {
+  return Math.floor(Math.random() * Model.figures.length);
+};
+
+export default Model;
